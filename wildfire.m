@@ -82,16 +82,18 @@ bnet.CPD{Area} = tabular_CPD(bnet, Area, 0.5*ones(1,16));
 %% validate
 engine = gibbs_sampling_inf_engine(bnet);
 evidence = cell(1,N);
-for i=1:10
-    evidence{FFMC} = fire(1,i);
-    evidence{DMC} = fire(2,i);
-    evidence{DC} = fire(3,i);
-    evidence{ISI} = fire(4,i);
-    evidence{temp} = fire(5,i);
-    evidence{RH} = fire(6,i);
-    evidence{wind} = fire(7,i);
-    evidence{rain} = fire(8,i);
+ce = 0;
+for i=1:validnum
+    evidence{FFMC} = validate(1,i);
+    evidence{DMC} = validate(2,i);
+    evidence{DC} = validate(3,i);
+    evidence{ISI} = validate(4,i);
+    evidence{temp} = validate(5,i);
+    evidence{RH} = validate(6,i);
+    evidence{wind} = validate(7,i);
+    evidence{rain} = validate(8,i);
     [engine, loglik] = enter_evidence(engine, evidence);
     marg = marginal_nodes(engine, Area);
-    %(train(9,i)-marg.T)^2;
+    ce = ce + (marg.T((validate(9,i)>=mArea)+1)> 0.5);
 end
+fprintf('\nRR = %.2f%%\n\n', ce/validnum);
