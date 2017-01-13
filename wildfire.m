@@ -96,4 +96,4 @@ for i=1:validnum
     marg = marginal_nodes(engine, Area);
     ce = ce + (marg.T((validate(9,i)>=mArea)+1)> 0.5);
 end
-fprintf('\nRR = %.2f%%\n\n', ce/validnum);
+fprintf('\nRR = %.2f%%\n\n', ce/validnum*100);
