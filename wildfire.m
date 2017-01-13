@@ -1,3 +1,4 @@
+addpath(genpath('bnt'));
 clear
 %% rv
 N = 12;
