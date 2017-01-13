@@ -19,3 +19,8 @@ Implement a forest fire risk assessment system to model the unknown burned area 
 - Windows x64
 - MATLAB R2016a
 - [Bayes Net Toolbox](http://bayesnet.github.io/bnt/docs/usage.html)
+
+### Report: [group8.pdf](./report/group8.pdf)
+- Core script: [wildfire.m](./wildfire.m)
+- Raw Dataset: [forestfires.csv](./forestfires.csv)
+- Presentation Slides: [presentation.pdf](./report/presentation.pdf)
