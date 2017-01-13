@@ -81,6 +81,7 @@ bnet.CPD{Fuel} = tabular_CPD(bnet, Fuel, 0.5*ones(1,16));
 bnet.CPD{Weather} = tabular_CPD(bnet, Weather, 0.5*ones(1,16));
 bnet.CPD{Area} = tabular_CPD(bnet, Area, 0.5*ones(1,16));
 %% validate
+tic
 engine = gibbs_sampling_inf_engine(bnet);
 evidence = cell(1,N);
 ce = 0;
@@ -97,4 +98,6 @@ for i=1:validnum
     marg = marginal_nodes(engine, Area);
     ce = ce + (marg.T((validate(9,i)>=mArea)+1)> 0.5);
 end
-fprintf('\nRR = %.2f%%\n\n', ce/validnum*100);
+fprintf('\nForest Fire - Group 8\n\nValidations: %d\n', validnum);
+fprintf('Quality(RR): %.2f%%\n', ce/validnum*100);
+fprintf('Overhead(s): %g\n\n', toc);
